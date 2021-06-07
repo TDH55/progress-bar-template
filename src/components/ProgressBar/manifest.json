@@ -51,6 +51,21 @@
       "type": "number",
       "default": 0,
       "control": { "type": "slider", "max": 100, "min": 0}
+    },
+    {
+      "name": "direction",
+      "displayName": "Direction",
+      "type": "number",
+      "default": 0,
+      "control": {
+        "type": "menu",
+        "options": [
+          { "label": "Left to Right", "value": 0 },
+          { "label": "Right to Left", "value": 1 },
+          { "label": "Top to Bottom", "value": 2 },
+          { "label": "Bottom to Top", "value": 3 }
+        ]
+      }
     }
   ]
 }
