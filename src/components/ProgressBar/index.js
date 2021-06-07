@@ -3,11 +3,10 @@ import { View, StyleSheet, Animated } from 'react-native'
 
 const ProgressBar = props => {
 
-  const { progressValue, maxValue, color, backgroundColor, animationSpeed, animationBounciness, rounding, _width, _height } = props
-  const height = _height
+  const { progressValue, maxValue, backgroundColor, progressColor, animationSpeed, animationBounciness, rounding, _height: height } = props
   let animation = useRef(new Animated.Value(0))
   const width = animation.current.interpolate({
-    inputRange: [0, 100],
+    inputRange: [0, maxValue],
     outputRange: ["0%", "100%"],
     extrapolate: "clamp"
   })
@@ -24,8 +23,8 @@ const ProgressBar = props => {
   }, [progressValue])
 
   return (
-    <View style={[styles.wrapper, {backgroundColor: color, height, borderRadius}]}>
-      <Animated.View style={[StyleSheet.progress], {backgroundColor: backgroundColor, height, width}} />
+    <View style={[styles.wrapper, {backgroundColor: backgroundColor, height, borderRadius}]}>
+      <Animated.View style={[StyleSheet.progress], {backgroundColor: progressColor, height, width}} />
     </View>
   )
 }

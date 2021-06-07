@@ -34,14 +34,14 @@
       "control": { "type": "slider", "max": 50, "min": 0}
     },
     {
-      "name": "color",
-      "displayName": "Color",
+      "name": "backgroundColor",
+      "displayName": "Background Color",
       "type": "color",
       "default": "@primary"
     },
     {
-      "name": "backgroundColor",
-      "displayName": "Background Color",
+      "name": "progressColor",
+      "displayName": "Progress Color",
       "type": "color",
       "default": "@primaryLight"
     },
