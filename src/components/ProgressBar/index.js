@@ -3,8 +3,7 @@ import { View, StyleSheet, Animated } from 'react-native'
 
 const ProgressBar = props => {
 
-  console.log(props)
-  const { progressValue, maxValue, color, backgroundColor, rounding, _width, _height } = props
+  const { progressValue, maxValue, color, backgroundColor, animationSpeed, animationBounciness, rounding, _width, _height } = props
   const height = _height
   let animation = useRef(new Animated.Value(0))
   const width = animation.current.interpolate({
@@ -15,9 +14,12 @@ const ProgressBar = props => {
   const borderRadius = (rounding / 100) * (height / 2)
 
   useEffect(() => {
-    Animated.timing(animation.current, {
+    console.log(`speed: ${animationSpeed}, bounciness: ${animationBounciness}`)
+    Animated.spring(animation.current, {
       toValue: progressValue,
-      duration: 100
+      duration: 100,
+      bounciness: animationBounciness,
+      speed: animationSpeed
     }).start()
   }, [progressValue])
 
