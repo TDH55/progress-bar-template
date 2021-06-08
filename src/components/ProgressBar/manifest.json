@@ -46,6 +46,19 @@
       "default": "@primaryLight"
     },
     {
+      "name": "borderWidth",
+      "displayName": "Border Width",
+      "type": "number",
+      "default": 0,
+      "control": { "type": "slider", "max": 8, "min": 0 }
+    },
+    {
+      "name": "borderColor",
+      "displayName": "Border Color",
+      "type": "color",
+      "default": "@background"
+    },
+    {
       "name": "rounding",
       "displayName": "Rounding",
       "type": "number",
