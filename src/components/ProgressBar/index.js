@@ -16,7 +16,6 @@ const ProgressBar = props => {
     editor,
   } = props
   let animation = useRef(new Animated.Value(0))
-  let lastAnimationUpdate = useRef(Date.now())
   let width
   let innerHeight
   let flexDirection
@@ -84,10 +83,10 @@ const ProgressBar = props => {
 
   if (editor) {
     const debounce = useCallback(
-      _.debounce((bounce, speed) => {
+      _.debounce((bounce, speed, progress) => {
         animation.current.setValue(0)
         Animated.spring(animation.current, {
-          toValue: progressValue,
+          toValue: progress,
           duration: 100,
           bounciness: bounce,
           speed: speed,
@@ -96,9 +95,7 @@ const ProgressBar = props => {
       []
     )
 
-    useEffect(() => {
-      debounce(animationBounciness, animationSpeed)
-    }, [animationSpeed, animationBounciness])
+    useEffect(() => debounce(animationBounciness, animationSpeed, progressValue), [animationSpeed, animationBounciness])
   }
   
 
