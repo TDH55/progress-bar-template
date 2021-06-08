@@ -82,21 +82,25 @@ const ProgressBar = props => {
     }).start()
   }, [progressValue])
 
-  const debounce = useCallback(
-    _.debounce(() => {
-      console.log("callback")
-      animation.current.setValue(0)
-      Animated.spring(animation.current, {
-        toValue: progressValue,
-        duration: 100,
-        bounciness: animationBounciness,
-        speed: animationSpeed,
-      }).start()
-    }, 500),
-    []
-  )
+  if (editor) {
+    const debounce = useCallback(
+      _.debounce((bounce, speed) => {
+        animation.current.setValue(0)
+        Animated.spring(animation.current, {
+          toValue: progressValue,
+          duration: 100,
+          bounciness: bounce,
+          speed: speed,
+        }).start()
+      }, 500),
+      []
+    )
 
-  useEffect(() => debounce(), [animationBounciness, animationSpeed])
+    useEffect(() => {
+      debounce(animationBounciness, animationSpeed)
+    }, [animationSpeed, animationBounciness])
+  }
+  
 
   const outerStyles = {
     backgroundColor,
@@ -112,8 +116,6 @@ const ProgressBar = props => {
     width,
     borderRadius,
   }
-
-
 
   return (
     <View style={[styles.wrapper, outerStyles]}>
