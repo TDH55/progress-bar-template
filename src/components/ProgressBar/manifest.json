@@ -47,14 +47,14 @@
     },
     {
       "name": "exteriorRounding",
-      "displayName": "Rounding (exterior)",
+      "displayName": "Exterior Rounding",
       "type": "number",
       "default": 0,
       "control": { "type": "slider", "max": 100, "min": 0 }
     },
     {
       "name": "interiorRounding",
-      "displayName": "Rounding (interior)",
+      "displayName": "Interior Rounding",
       "type": "number",
       "default": 0,
       "control": { "type": "slider", "max": 100, "min": 0 }
@@ -78,19 +78,19 @@
   "childComponents": [
     {
       "name": "exteriorBorder",
-      "displayName": "Border (exterior)",
+      "displayName": "Exterior Border",
       "props": [
         { "name": "enabled", "type": "boolean", "default": false },
         {
           "name": "exteriorBorderWidth",
-          "displayName": "Border Width (exterior)",
+          "displayName": "Border Width",
           "type": "number",
           "default": 1,
           "control": { "type": "slider", "max": 8, "min": 1 }
         },
         {
           "name": "exteriorBorderColor",
-          "displayName": "Border Color (exterior)",
+          "displayName": "Border Color",
           "type": "color",
           "default": "@text"
         }
@@ -98,19 +98,19 @@
     },
     {
       "name": "interiorBorder",
-      "displayName": "Border (interior)",
+      "displayName": "Interior Border",
       "props": [
         { "name": "enabled", "type": "boolean", "default": false },
         {
           "name": "interiorBorderWidth",
-          "displayName": "Border Width (interior)",
+          "displayName": "Border Width",
           "type": "number",
           "default": 1,
           "control": { "type": "slider", "max": 8, "min": 1 }
         },
         {
           "name": "interiorBorderColor",
-          "displayName": "Border Color (interior)",
+          "displayName": "Border Color",
           "type": "color",
           "default": "@text"
         }
