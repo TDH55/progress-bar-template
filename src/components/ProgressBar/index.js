@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef } from 'react'
 import { View, StyleSheet, Animated } from 'react-native'
 
 const ProgressBar = props => {
-  console.log(props)
   let {
     progressValue,
     maxValue,
@@ -18,6 +17,7 @@ const ProgressBar = props => {
     direction,
     editor,
   } = props
+  const animationDuration = 100
   let innerBorderStyle = {}
   let animation = useRef(new Animated.Value(0))
   let width
@@ -25,10 +25,10 @@ const ProgressBar = props => {
   let flexDirection
 
   //Set default values if the editor input is invalid
-  if(!progressValue) {
+  if (!progressValue) {
     progressValue = 0
   }
-  if(!maxValue) {
+  if (!maxValue) {
     maxValue = 100
   }
   if (maxValue <= 0) {
@@ -50,10 +50,11 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      innerHeight = height - (borderWidth * 2)
-      innerBorderStyle = {}
-      innerBorderStyle.borderRightWidth = borderWidth
-      innerBorderStyle.borderRightColor = borderColor
+      innerHeight = height - borderWidth * 2
+      innerBorderStyle = {
+        borderRightWidth: borderWidth,
+        borderRightColor: borderColor,
+      }
       break
     case 1:
       flexDirection = 'row-reverse'
@@ -62,10 +63,11 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      innerHeight = height - (borderWidth * 2)
-      innerBorderStyle = {}
-      innerBorderStyle.borderLeftWidth = borderWidth
-      innerBorderStyle.borderLeftColor = borderColor
+      innerHeight = height - borderWidth * 2
+      innerBorderStyle = {
+        borderLeftWidth: borderWidth,
+        borderLeftColor: borderColor,
+      }
       break
     case 2:
       flexDirection = 'column'
@@ -74,10 +76,11 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      width = _width - (borderWidth * 2)
-      innerBorderStyle = {}
-      innerBorderStyle.borderBottomWidth = borderWidth
-      innerBorderStyle.borderBottomColor = borderColor
+      width = _width - borderWidth * 2
+      innerBorderStyle = {
+        borderBottomWidth: borderWidth,
+        borderBottomColor: borderColor,
+      }
       break
     case 3:
       flexDirection = 'column-reverse'
@@ -86,10 +89,11 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      width = _width - (borderWidth * 2)
-      innerBorderStyle = {}
-      innerBorderStyle.borderTopWidth = borderWidth
-      innerBorderStyle.borderTopColor = borderColor
+      width = _width - borderWidth * 2
+      innerBorderStyle = {
+        borderTopWidth: borderWidth,
+        borderTopColor: borderColor,
+      }
       break
   }
 
@@ -98,7 +102,7 @@ const ProgressBar = props => {
   useEffect(() => {
     Animated.spring(animation.current, {
       toValue: progressValue,
-      duration: 100,
+      duration: animationDuration,
       bounciness: animationBounciness,
       speed: animationSpeed,
     }).start()
@@ -110,7 +114,7 @@ const ProgressBar = props => {
         animation.current.setValue(0)
         Animated.spring(animation.current, {
           toValue: progress,
-          duration: 100,
+          duration: animationDuration,
           bounciness: bounce,
           speed: speed,
         }).start()
@@ -118,9 +122,11 @@ const ProgressBar = props => {
       []
     )
 
-    useEffect(() => debounce(animationBounciness, animationSpeed, progressValue), [animationSpeed, animationBounciness])
+    useEffect(
+      () => debounce(animationBounciness, animationSpeed, progressValue),
+      [animationSpeed, animationBounciness]
+    )
   }
-  
 
   const outerStyles = {
     backgroundColor,
@@ -138,7 +144,6 @@ const ProgressBar = props => {
     width,
     borderRadius,
   }
-  
 
   return (
     <View style={[styles.wrapper, outerStyles]}>

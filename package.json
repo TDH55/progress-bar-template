@@ -1,5 +1,5 @@
 {
-  "name": "progress-bar",
+  "name": "@TaylorHoward/progress-bar",
   "description": "Progress Bar Project for Summer 2020 Onboarding",
   "version": "1.0.0",
   "main": "index.js",
