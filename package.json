@@ -1,7 +1,7 @@
 {
   "name": "@TaylorHoward/progress-bar",
   "description": "Progress Bar Project for Summer 2020 Onboarding",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "ISC",
   "author": "Adalo",

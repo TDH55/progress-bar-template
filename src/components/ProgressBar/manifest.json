@@ -1,5 +1,5 @@
 {
-  "displayName": "Progress Bar",
+  "displayName": "Progress Bar - Taylor Howard",
   "defaultWidth": 300,
   "defaultHeight": 8,
   "resizeY": true,
@@ -24,14 +24,14 @@
       "displayName": "Animation Speed",
       "type": "number",
       "default": 12,
-      "control": { "type": "slider", "max": 100, "min": 0}
-    }, 
+      "control": { "type": "slider", "max": 100, "min": 0 }
+    },
     {
       "name": "animationBounciness",
       "displayName": "Animation Bounciness",
       "type": "number",
       "default": 8,
-      "control": { "type": "slider", "max": 50, "min": 0}
+      "control": { "type": "slider", "max": 50, "min": 0 }
     },
     {
       "name": "backgroundColor",
@@ -46,24 +46,18 @@
       "default": "@primaryLight"
     },
     {
-      "name": "borderWidth",
-      "displayName": "Border Width",
+      "name": "exteriorRounding",
+      "displayName": "Rounding (exterior)",
       "type": "number",
       "default": 0,
-      "control": { "type": "slider", "max": 8, "min": 0 }
+      "control": { "type": "slider", "max": 100, "min": 0 }
     },
     {
-      "name": "borderColor",
-      "displayName": "Border Color",
-      "type": "color",
-      "default": "@background"
-    },
-    {
-      "name": "rounding",
-      "displayName": "Rounding",
+      "name": "interiorRounding",
+      "displayName": "Rounding (interior)",
       "type": "number",
       "default": 0,
-      "control": { "type": "slider", "max": 100, "min": 0}
+      "control": { "type": "slider", "max": 100, "min": 0 }
     },
     {
       "name": "direction",
@@ -79,6 +73,48 @@
           { "label": "Bottom to Top", "value": 3 }
         ]
       }
+    }
+  ],
+  "childComponents": [
+    {
+      "name": "exteriorBorder",
+      "displayName": "Border (exterior)",
+      "props": [
+        { "name": "enabled", "type": "boolean", "default": false },
+        {
+          "name": "exteriorBorderWidth",
+          "displayName": "Border Width (exterior)",
+          "type": "number",
+          "default": 1,
+          "control": { "type": "slider", "max": 8, "min": 1 }
+        },
+        {
+          "name": "exteriorBorderColor",
+          "displayName": "Border Color (exterior)",
+          "type": "color",
+          "default": "@text"
+        }
+      ]
+    },
+    {
+      "name": "interiorBorder",
+      "displayName": "Border (interior)",
+      "props": [
+        { "name": "enabled", "type": "boolean", "default": false },
+        {
+          "name": "interiorBorderWidth",
+          "displayName": "Border Width (interior)",
+          "type": "number",
+          "default": 1,
+          "control": { "type": "slider", "max": 8, "min": 1 }
+        },
+        {
+          "name": "interiorBorderColor",
+          "displayName": "Border Color (interior)",
+          "type": "color",
+          "default": "@text"
+        }
+      ]
     }
   ]
 }

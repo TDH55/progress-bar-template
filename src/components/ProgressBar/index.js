@@ -9,8 +9,10 @@ const ProgressBar = props => {
     progressColor,
     animationSpeed,
     animationBounciness,
-    rounding,
-    borderWidth,
+    exteriorRounding,
+    interiorRounding,
+    exteriorBorder,
+    interiorBorder,
     borderColor,
     _height: height,
     _width,
@@ -23,6 +25,18 @@ const ProgressBar = props => {
   let width
   let innerHeight
   let flexDirection
+  let { exteriorBorderWidth, exteriorBorderColor } = exteriorBorder
+  let { interiorBorderWidth, interiorBorderColor } = interiorBorder
+  let interiorRadius = {}
+
+  //set border values based on enabled/disabled
+  if (!exteriorBorder.enabled) {
+    exteriorBorderWidth = 0
+  }
+
+  if (!interiorBorder.enabled) {
+    interiorBorderWidth = 0
+  }
 
   //Set default values if the editor input is invalid
   if (!progressValue) {
@@ -41,7 +55,9 @@ const ProgressBar = props => {
     progressValue = maxValue
   }
 
-  //TODO: account for border when setting inner height/width
+  const exteriorBorderRadius = (exteriorRounding / 100) * (height / 2)
+  const interiorBorderRadius = (interiorRounding / 100) * (height / 2)
+
   switch (direction) {
     case 0:
       flexDirection = 'row'
@@ -50,10 +66,14 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      innerHeight = height - borderWidth * 2
+      innerHeight = height - exteriorBorderWidth * 2
       innerBorderStyle = {
-        borderRightWidth: borderWidth,
-        borderRightColor: borderColor,
+        borderRightWidth: interiorBorderWidth,
+        borderRightColor: interiorBorderColor,
+      }
+      interiorRadius = {
+        borderBottomRightRadius: interiorBorderRadius,
+        borderTopRightRadius: interiorBorderRadius,
       }
       break
     case 1:
@@ -63,10 +83,14 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      innerHeight = height - borderWidth * 2
+      innerHeight = height - exteriorBorderWidth * 2
       innerBorderStyle = {
-        borderLeftWidth: borderWidth,
-        borderLeftColor: borderColor,
+        borderLeftWidth: interiorBorderWidth,
+        borderLeftColor: interiorBorderColor,
+      }
+      interiorRadius = {
+        borderBottomLeftRadius: interiorBorderRadius,
+        borderTopLeftRadius: interiorBorderRadius,
       }
       break
     case 2:
@@ -76,10 +100,14 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      width = _width - borderWidth * 2
+      width = _width - exteriorBorderWidth * 2
       innerBorderStyle = {
-        borderBottomWidth: borderWidth,
-        borderBottomColor: borderColor,
+        borderBottomWidth: interiorBorderWidth,
+        borderBottomColor: interiorBorderColor,
+      }
+      interiorRadius = {
+        borderBottomLeftRadius: interiorBorderRadius,
+        borderBottomRightRadius: interiorBorderRadius,
       }
       break
     case 3:
@@ -89,15 +117,17 @@ const ProgressBar = props => {
         outputRange: ['0%', '100%'],
         extrapolate: 'clamp',
       })
-      width = _width - borderWidth * 2
+      width = _width - exteriorBorderWidth * 2
       innerBorderStyle = {
-        borderTopWidth: borderWidth,
-        borderTopColor: borderColor,
+        borderTopWidth: interiorBorderWidth,
+        borderTopColor: interiorBorderColor,
+      }
+      interiorRadius = {
+        borderTopRightRadius: interiorBorderRadius,
+        borderTopLeftRadius: interiorBorderRadius,
       }
       break
   }
-
-  const borderRadius = (rounding / 100) * (height / 2)
 
   useEffect(() => {
     Animated.spring(animation.current, {
@@ -131,9 +161,9 @@ const ProgressBar = props => {
   const outerStyles = {
     backgroundColor,
     height,
-    borderRadius,
-    borderWidth,
-    borderColor,
+    borderRadius: exteriorBorderRadius,
+    borderWidth: exteriorBorderWidth,
+    borderColor: exteriorBorderColor,
     flexDirection,
     overflow: 'hidden',
   }
@@ -142,12 +172,14 @@ const ProgressBar = props => {
     backgroundColor: progressColor,
     height: innerHeight,
     width,
-    borderRadius,
+    // borderRadius: interiorBorderRadius,
   }
 
   return (
     <View style={[styles.wrapper, outerStyles]}>
-      <Animated.View style={[styles.progress, innerStyles, innerBorderStyle]} />
+      <Animated.View
+        style={[styles.progress, innerStyles, innerBorderStyle, interiorRadius]}
+      />
     </View>
   )
 }
